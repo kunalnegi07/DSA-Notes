@@ -1,0 +1,18 @@
+class Solution {
+public:
+    long long findTheArrayConcVal(vector<int>& nums) {
+        long long concat = 0;
+        
+        while(nums.size()>1){
+            long long first = nums[0];
+            long long last = nums[nums.size()-1];
+            concat += stoll(to_string(first)+to_string(last));
+            nums.erase(nums.begin());
+            nums.erase(nums.end()-1);
+        }
+        if(nums.size()==1){
+                concat+= nums[0];
+            }
+        return concat;
+    }
+};
