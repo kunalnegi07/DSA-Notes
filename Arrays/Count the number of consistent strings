@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int countConsistentStrings(string allowed, vector<string>& words) {
+
+        // Store allowed characters
+        unordered_set<char> st(allowed.begin(), allowed.end());
+
+        int ans = 0;
+
+        for(auto &w : words){
+            bool ok = true;
+
+            for(char c : w){
+                // Fast lookup
+                if(!st.count(c)){
+                    ok = false;
+                    break;
+                }
+            }
+
+            if(ok) ans++;
+        }
+
+        return ans;
+    }
+};
