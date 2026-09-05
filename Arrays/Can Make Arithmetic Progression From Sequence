@@ -1,1 +1,21 @@
-
+So in this problem we have to check if the given array can be arranged in the form of ap or not .
+I knew that in an ap the common difference between two consecutives terms is always same.
+So first I decided to sort the array to get them arranged in the right order after that I stored the common difference between the first two terms
+in an int d variable for the array to be an ap all other consecutive terms should  have the same common difference .
+So I used an While loop to check that for each term .
+Code ---
+class Solution {
+public:
+    bool canMakeArithmeticProgression(vector<int>& arr) {
+        sort(arr.begin(),arr.end());
+        int d = arr[1]-arr[0];
+        int i = 0;
+        while(i<arr.size()-1){
+            if(arr[i+1]-arr[i]!=d){
+                return false;
+            }
+            i++;
+        }
+        return true;
+    }
+};
