@@ -37,5 +37,43 @@ public:
         return v;
     }
 };
+so I was making of the whole main array which was taking more time rather than that I could have just made the copy only till the given query range like this---
+class Solution {
+public:
+    vector<bool> checkArithmeticSubarrays(vector<int>& nums, vector<int>& l, vector<int>& r) {
+        vector<bool> v;
+        int start = 0;
+        int end = 0;
+        for(int i = 0;i<l.size();i++){
+            start = l[i];
+            end = r[i];
+            int count = 0;
+            vector<int> temp(nums.begin() + start, nums.begin() + end + 1);
+            sort(temp.begin(),temp.end());
+            int d = temp[1]-temp[0];
+            for(int j = 1;j<temp.size();j++){
+                if(temp[j]-temp[j-1]!=d){
+                    v.push_back(false);
+                    count++;
+                    break;
+                }
+            }
+            if(count==0){
+                v.push_back(true);
+            }
+        }
+        return v;
+    }
+};
+
+
+|               | First                 | New             |
+| ------------- | --------------------- | --------------- |
+| Copy          | `O(n)`                | `O(k)`          |
+| Sort          | `O(k log k)`          | `O(k log k)`    |
+| Check         | `O(k)`                | `O(k)`          |
+| Restore       | `O(n)`                | None            |
+| **Per query** | **O(n + k log k)**    | **O(k log k)**  |
+| **q queries** | **O(q(n + k log k))** | **O(qk log k)** |
 
 
