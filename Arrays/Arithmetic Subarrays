@@ -5,7 +5,7 @@ So I did a question where I had to check if an array is ap or not I used the log
 First by sorting the array and then finding  the common difference between the first two elements in the range and then checking the common difference 
 For all the remaining elements in the range query.
 The main problem was How I would sort the array for a certain given range I searched it up and it is done by.
-sort(v.begin()+low,v.end()+end +1)
+sort(v.begin()+start,v.end()+end +1)
 now it was done I also made the mistake that I was sorting the main array each time that changed the order for the range queries.
 I fixed it by making a copy of the main array and then sorting the index query range after I checked for that range.
 I gave the original value back to the main array.
