@@ -1,1 +1,41 @@
+So in this question we were given three arrays main array and two arrays to get the starting and last index to get the query range.
+You are given an array of n integers, nums, and two arrays of m integers each, l and r, representing the m range queries, where the ith query is the range [l[i], r[i]]. All the arrays are 0-indexed.
+Return a list of boolean elements answer, where answer[i] is true if the subarray nums[l[i]], nums[l[i]+1], ... , nums[r[i]] can be rearranged to form an arithmetic sequence, and false otherwise.
+So I did a question where I had to check if an array is ap or not I used the logic here to check if the given range query is ap or not .
+First by sorting the array and then finding  the common difference between the first two elements in the range and then checking the common difference 
+For all the remaining elements in the range query.
+The main problem was How I would sort the array for a certain given range I searched it up and it is done by.
+sort(v.begin()+low,v.end()+end +1)
+now it was done I also made the mistake that I was sorting the main array each time that changed the order for the range queries.
+I fixed it by making a copy of the main array and then sorting the index query range after I checked for that range.
+I gave the original value back to the main array.
+class Solution {
+public:
+    vector<bool> checkArithmeticSubarrays(vector<int>& nums, vector<int>& l, vector<int>& r) {
+        vector<bool> v;
+        int start = 0;
+        int end = 0;
+        for(int i = 0;i<l.size();i++){
+            start = l[i];
+            end = r[i];
+            vector <int> backup = nums;
+            int count = 0;
+            sort(nums.begin() + start, nums.begin() + end +1);
+            int d = nums[start+1]-nums[start];
+            for(int j = l[i];j<end;j++){
+                if(nums[j+1]-nums[j]!=d){
+                    v.push_back(false);
+                    count++;
+                    break;
+                }
+            }
+            if(count==0){
+                v.push_back(true);
+            }
+            nums = backup;
+        }
+        return v;
+    }
+};
+
 
