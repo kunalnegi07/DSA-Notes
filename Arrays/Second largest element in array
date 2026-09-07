@@ -1,1 +1,23 @@
+So here i sorted the array and just return the second last element from the array .
+The problem is there can be duplicates in the array so we have to get unique array.
+To do that i used unique function moves all unique elements to the front of the range. It returns an iterator (newEnd) pointing to the logical new end of the unique elements.
+Elements after newEnd still exist in memory, but their values are unspecified.
+auto newEnd = unique(nums.begin(), nums.end());
+after that i erased the duplicate elements that were accumalated in the end of the array.
+nums.erase(newEnd, nums.end());
+also if the array contains only 1 element or all elements are same there would be no second largest element return -1 in that case.
+code---
+class Solution {
+public:
+    int secondLargestElement(vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+    auto newEnd = unique(nums.begin(), nums.end());
+    nums.erase(newEnd, nums.end());
+    if(nums[nums.size()-1]==nums[nums.size()-2] || nums.size()==1){
+        return -1;
+    }
+    return nums[nums.size()-2];
+    }
+};
+
 
