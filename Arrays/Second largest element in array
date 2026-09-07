@@ -1,3 +1,4 @@
+Brute force I came up with ---
 So here i sorted the array and just return the second last element from the array .
 The problem is there can be duplicates in the array so we have to get unique array.
 To do that i used unique function moves all unique elements to the front of the range. It returns an iterator (newEnd) pointing to the logical new end of the unique elements.
@@ -13,11 +14,43 @@ public:
     sort(nums.begin(), nums.end());
     auto newEnd = unique(nums.begin(), nums.end());
     nums.erase(newEnd, nums.end());
-    if(nums[nums.size()-1]==nums[nums.size()-2] || nums.size()==1){
+    if(nums.size()<2){
         return -1;
     }
     return nums[nums.size()-2];
     }
 };
+time complexity here is O(nlogn)
+
+The most optimal approach ---
+would be using two variables One largest and other second largest and traversing the array if largest is less than a[i] changes value of largest
+to a[i] and value of second largest to largest .
+after finding the largest if largest is greater than a[i] but a[i] is greater than second largest changes second largest to a[i]
+also have to check for the case where the second largest value doesn't exist;
+code---
+class Solution {
+public:
+    int secondLargestElement(vector<int>& nums) {
+        int largest = INT_MIN;
+        int secondLargest = INT_MIN;
+
+        for(int i = 0; i < nums.size(); i++) {
+            if(nums[i] > largest) {
+                secondLargest = largest;
+                largest = nums[i];
+            }
+            else if(nums[i] > secondLargest && nums[i] < largest) {
+                secondLargest = nums[i];
+            }
+        }
+
+        if(secondLargest == INT_MIN)
+            return -1;
+
+        return secondLargest;
+    }
+};
+
+Time complexity here is O(n)
 
 
