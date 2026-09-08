@@ -17,3 +17,27 @@ unique() → O(n) — it traverses the array once.
 erase() → O(n) in the worst case — elements may need to be shifted.
 return nums.size() → O(1).
 total = O(2n) -> O(n)
+
+The unique() method in itself is using two pointers.
+code---
+for(int j = 1;j<n;j++){
+    if(nums[j]!=nums[i]){
+        nums[i+1] = nums[j];
+        i++;
+    }
+    return i+1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
