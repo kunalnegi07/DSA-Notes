@@ -1,0 +1,19 @@
+So in this question we have to remove duplicates from a sorted vector and return the size of the new array quite confusing wording .
+So what I did in this one is I used the unique vector method to get all the unique elements to the left of the vector .
+unique() returns an iterator pointing to the new logical end of the unique elements.
+and then we erase the elements form that iterator to the end of the vector.
+
+code---
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        nums.erase(unique(nums.begin(),nums.end()),nums.end());
+        return nums.size();
+    }
+};
+Time complexity --
+unique() → O(n) — it traverses the array once.
+erase() → O(n) in the worst case — elements may need to be shifted.
+return nums.size() → O(1).
+total = O(2n) -> O(n)
