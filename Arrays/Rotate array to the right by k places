@@ -1,1 +1,24 @@
+So in this question we had to move the array elments to the right by k places.
+I have done a question similar to this where we have to check if a sorted array is moved by k places .
+I just moved the array index by k places but we get a problem here one problem is that for some indexes it will go out of the array bound.
+To fix that I used (k+i)%(no of elements  in the  array)  by this they get placed to there correct place from the start of the array.
+Another problem that came was I was overwriting the elements from the original array because of that I was getting false values .
+To fix that I made a copy of og array and then changed value in it for every iteration and then changes the og array value to it in the end.
+
+code---
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        vector <int> v = nums;
+        for(int i = 0; i<nums.size();i++){
+                v[(k+i)%(nums.size())] = nums[i];
+        }
+        nums = v;
+    }
+};
+Time complexity---
+O(n) for copying nums into v
+O(n) for for loop 
+O(n) for copying 
+total time complexity === O(n)
 
