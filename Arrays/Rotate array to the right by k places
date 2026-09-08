@@ -22,3 +22,18 @@ O(n) for for loop
 O(n) for copying 
 total time complexity === O(n)
 
+Method 2---
+By observation we can notice that by reversing the elements till k from beginning 
+and then reversing elements from end -k to end 
+and then reversing the whole array we can get the sol without usign O(n) space;
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        k = k % nums.size();
+
+        reverse(nums.begin(), nums.end() - k);
+        reverse(nums.end() - k, nums.end());
+        reverse(nums.begin(), nums.end());
+    }
+};
+
