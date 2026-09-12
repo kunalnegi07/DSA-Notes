@@ -1,0 +1,33 @@
+Had to square the elements of array and then sort them for O(n) complexity.
+Make the result array to store the elements.
+make left point to start and right point to end of the array.
+and position at last too cause we will fill the element from the end as we know the biggest element would be  at starting or end 
+because the input array is sorted.
+Now, we check if (abs(nums[left])>abs(nums[right]) if it is then we square the nums[left] and store it at the end of result array
+Now increase left and dec position because we want to check for next value.
+else if value from right is greater than left we square right value and add to result dec position and right.
+
+code---
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        vector<int> result(nums.size()) ;
+        int left = 0;
+        int right = nums.size()-1;
+        int position = nums.size()-1;
+        while(left<=right){
+            if(abs(nums[left])>abs(nums[right])){
+                result[position] = nums[left]*nums[left];
+                left++;
+            }else{
+                result[position] = nums[right]*nums[right];
+                right--;
+            }
+            position--;
+        }
+        return result;
+    }
+};
+Time: O(n)
+Space: O(n)
+Extra auxiliary space excluding the output array: O(1)
