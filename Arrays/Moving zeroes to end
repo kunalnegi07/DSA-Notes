@@ -1,0 +1,24 @@
+To move zeroes to end we use two pointers first we loop over the array and get the first 0 element 
+we point our first pointer to the first zero and second pointer to the term after the first 0.
+After this we loop over the array and check if next element is zero or not if not zero swap the elements.
+
+code---
+void moveZeroes(vector<int>& nums) {
+    int j = -1;
+
+    for(int i = 0; i < nums.size(); i++) {
+        if(nums[i] == 0) {
+            j = i;
+            break;
+        }
+    }
+
+    if(j == -1) return;
+
+    for(int i = j + 1; i < nums.size(); i++) {
+        if(nums[i] != 0) {
+            swap(nums[i], nums[j]);
+            j++;
+        }
+    }
+}
