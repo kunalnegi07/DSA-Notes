@@ -1,0 +1,40 @@
+So in this problem we have an array of only 0,1 and 2s and we have to sort them.
+I just counted the no of 0 1 and 2s and them put them in the array .
+code---
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int zeros= 0;
+        int ones = 0;
+        int twos = 0;
+        for(int i =0;i<nums.size();i++){
+            if(nums[i]==0){
+                zeros++;
+            }else if(nums[i]==1){
+                ones++;
+            }else{
+                twos++;
+            }
+        }
+        for(int i =0;i<nums.size();i++){
+            if(zeros>0){
+                nums[i]=0;
+                zeros--;
+            }else if(ones>0){
+                nums[i] = 1;
+                ones--;
+            }else if(twos>0){
+                nums[i] =2;
+                twos--;
+            }
+        }
+    }
+};
+Time complexity --- O(n).
+It can also be done by three pointers (dutch flag approach)---
+
+
+
+
+
+
