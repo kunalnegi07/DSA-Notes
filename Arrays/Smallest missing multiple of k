@@ -1,0 +1,19 @@
+So in this question we have to find the smallest multiple of k that is missing from the vector.
+What we do is make a set take values of the vector and then iterate over it 
+start by searching from first multiple of k if it is not present return the multiple else keep moving.
+
+code ---
+class Solution {
+public:
+    int missingMultiple(vector<int>& nums, int k) {
+        unordered_set<int> st(nums.begin(), nums.end());
+
+        for (int i = 1; ; i++) {
+            int multiple = k * i;
+
+            if (!st.count(multiple))
+                return multiple;
+        }
+    }
+};
+time complexity = O(n)
