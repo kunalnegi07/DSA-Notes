@@ -1,0 +1,20 @@
+so the brute force is pretty simple we use nested loops to find the max value in that interval and then store it in the array 
+and have to make the last element be -1
+code ---
+class Solution {
+public:
+    vector<int> replaceElements(vector<int>& arr) {
+        for(int i =0;i<arr.size();i++){
+            if(i==arr.size()-1){
+                    arr[i]=-1;
+                    break;
+                }
+            int maximum = 0;
+            for(int j =arr.size()-1;j>i;j--){
+                maximum = max(maximum,arr[j]);
+                arr[i] = maximum;
+            }
+        }
+        return arr;
+    }
+};
