@@ -1,0 +1,211 @@
+The idea is to keep shrinking the **boundaries** of the matrix after traversing each side.
+
+```cpp
+int m = matrix.size();
+int n = matrix[0].size();
+
+int left = 0, top = 0;
+int right = n - 1, bottom = m - 1;
+```
+
+For this matrix:
+
+```text
+1  2  3  4
+5  6  7  8
+9  10 11 12
+13 14 15 16
+```
+
+Initially:
+
+```text
+left = 0
+right = 3
+top = 0
+bottom = 3
+```
+
+So the current boundary is the entire matrix.
+
+---
+
+### 1. Traverse top row
+
+```cpp
+for (int i = left; i <= right; i++)
+    ans.push_back(matrix[top][i]);
+
+top++;
+```
+
+Adds:
+
+```text
+1 2 3 4
+```
+
+Then:
+
+```cpp
+top++;
+```
+
+So:
+
+```text
+top = 1
+```
+
+We've finished row 0.
+
+---
+
+### 2. Traverse right column
+
+```cpp
+for (int i = top; i <= bottom; i++)
+    ans.push_back(matrix[i][right]);
+
+right--;
+```
+
+Adds:
+
+```text
+8 12 16
+```
+
+Then:
+
+```cpp
+right--;
+```
+
+So:
+
+```text
+right = 2
+```
+
+We've finished column 3.
+
+---
+
+### 3. Traverse bottom row
+
+```cpp
+if (top <= bottom) {
+    for (int i = right; i >= left; i--)
+        ans.push_back(matrix[bottom][i]);
+    bottom--;
+}
+```
+
+Adds:
+
+```text
+15 14 13
+```
+
+Then:
+
+```cpp
+bottom--;
+```
+
+So:
+
+```text
+bottom = 2
+```
+
+---
+
+### 4. Traverse left column
+
+```cpp
+if (left <= right) {
+    for (int i = bottom; i >= top; i--)
+        ans.push_back(matrix[i][left]);
+    left++;
+}
+```
+
+Adds:
+
+```text
+9 5
+```
+
+Then:
+
+```cpp
+left++;
+```
+
+So:
+
+```text
+left = 1
+```
+
+---
+
+Now we've completed the outer layer:
+
+```text
+1  2  3  4
+5        8
+9        12
+13 14 15 16
+```
+
+The boundaries are now:
+
+```text
+left = 1
+right = 2
+top = 1
+bottom = 2
+```
+
+The `while` loop starts again and processes:
+
+```text
+6  7
+10 11
+```
+
+giving:
+
+```text
+6 7 11 10
+```
+
+Final result:
+
+```text
+1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
+```
+
+### Why `while`?
+
+This is the key:
+
+```cpp
+while (left <= right && top <= bottom)
+```
+
+Each iteration processes **one layer** of the matrix.
+
+After each side:
+
+```text
+top++       → top layer removed
+right--     → right layer removed
+bottom--    → bottom layer removed
+left++      → left layer removed
+```
+
+So you're basically **peeling the matrix layer by layer**.
